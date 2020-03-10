@@ -144,6 +144,7 @@
                     <li class="footer_list-item"><a href="#" class="footer_link">Privacy</a></li>
                     <li class="footer_list-item"><a href="#" class="footer_link">Terms</a></li>
                     <li class="footer_list-item"><a href="#" class="footer_link">Directory</a></li>
+                    <li class="footer__list-item"><a href="#" class="footer__link">Language</a></li>
                     <li class="footer_list-item"><a href="logout.php" class="footer_link">LOGOUT</a></li>
                 </ul>
             </nav>
