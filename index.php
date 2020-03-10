@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <?php session_start(); ?>
     <head>
         <title>Vietgram | Login</title>
         <meta charset="UTF-8">
@@ -17,7 +18,7 @@
             <div class="login__column">
                 <div class="login__box">
                     <img src="images/loginLogo.png" class="login__logo" />
-                    <form action="feed.html" method="get" class="login__form">
+                    <form action="login.php" method="post" class="login__form">
                         <input type="text" name="username" placeholder="Username" required />
                         <input type="password" name="password" placeholder="Password" required />
                         <input type="submit" value="Log in" />
@@ -30,7 +31,7 @@
                     <a href="#" class="login__link login__link--small">Forgot password</a>
                 </div>
                 <div class="login__box">
-                    <span>Don't have an account?</span> <a href="#">Sign up</a>
+                    <span>Don't have an account?</span> <a href="signup.html">Sign up</a>
                 </div>
                 <div class="login__box--transparent">
                     <span>Get the app.</span>

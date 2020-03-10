@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+    session_start();
+    require_once 'function.php';
+   /* $photo = query('SELECT * FROM photo');*/
+    $profile = query("SELECT * FROM profile");
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +18,7 @@
 <body>
     <nav class="navigation">
         <div class="navigation__column">
-            <a href="feed.html">
+            <a href="feed.php">
                 <img src="images/logo.png" />
             </a>
         </div>
@@ -34,7 +39,7 @@
                     </a>
                 </li>
                 <li class="navigation__list-item">
-                    <a href="profile.html" class="navigation__link">
+                    <a href="profile.php" class="navigation__link">
                         <i class="fa fa-user-o fa-lg"></i>
                     </a>
                 </li>
@@ -48,8 +53,8 @@
             </div>
             <div class="profile__column">
                 <div class="profile__title">
-                    <h3 class="profile__username">serranoarevalo</h3>
-                    <a href="edit-profile.html">Edit profile</a>
+                    <h3 class="profile__username"><?= $profile[0]['username']; ?></h3>
+                    <a href="edit-profile.php?id=<?= $profile[0]['id']; ?>">Edit profile</a>
                     <i class="fa fa-cog fa-lg"></i>
                 </div>
                 <ul class="profile__stats">
@@ -65,11 +70,9 @@
                 </ul>
                 <p class="profile__bio">
                     <span class="profile__full-name">
-                        Nicolás Serrano Arévalo
-                    </span> Doing whatever and eating Pho Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Ducimus suscipit praesentium eveniet quibusdam ipsam omnis fugit. Tempore voluptates ratione recusandae
-                    natus illo perspiciatis suscipit, odio consequuntur quasi obcaecati minus! Omnis.
-                    <a href="#">serranoarevalo.com</a>
+                        <?= $profile[0]['name']; ?>
+                    </span> <?= $profile[0]['bio']; ?>
+                    <a href="#"><?= $profile[0]['website']; ?></a>
                 </p>
             </div>
         </header>
