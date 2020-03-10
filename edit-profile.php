@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
     session_start();
     require_once 'function.php';
-    $id = $_GET["id"];
+    include "koneksi.php";
 
-    $profile = query("SELECT * FROM  profile WHERE id = $id ")[0];
-    $gender = array('Male', 'Female', 'Can t remember');
+     $user_id = $_SESSION['user_id'];
 
-    if (isset($_POST["submit"])) {
-        if (EditProfile($_POST) > 0) {
-            header("Location: profile.php");
-        } else {
-            header("Location: edit-profile.php");
-        }
-    }
+    $result = mysqli_query($koneksi,"select * from profile where id='$user_id'" );
+    $data = mysqli_fetch_assoc($result);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,47 +58,43 @@
                 <div class="edit-profile__avatar-container">
                     <img src="images/avatar.jpg" class="edit-profile__avatar" />
                 </div>
-                <h4 class="edit-profile__username"><?= $profile["username"]; ?></h4>
+                <h4 class="edit-profile__username"><?php echo $data['name']; ?></h4>
             </header>
-            <form action="edit-profile.php" method="post" class="edit-profile__form">
-                <input type="hidden" name="id" value="<?= $profile['id']; ?>">
+            <form action="edit.php" method="post" class="edit-profile__form">
+                <input type="hidden" name="id">
                 <div class="form__row">
                     <label for="full-name" class="form__label">Name:</label>
-                    <input id="full-name" type="text" class="form__input" value="<?= $profile['name']; ?>"/>
+                    <input id="full-name" type="text" class="form__input" name="name"/>
                 </div>
                 <div class="form__row">
                     <label for="user-name" class="form__label">Username:</label>
-                    <input id="user-name" type="text" class="form__input" value="<?= $profile['username']; ?>"/>
+                    <input id="user-name" type="text" class="form__input" name="username" />
                 </div>
                 <div class="form__row">
                     <label for="website" class="form__label">Website:</label>
-                    <input id="website" type="url" class="form__input" value="<?= $profile['website']; ?>"/>
+                    <input id="website" type="url" class="form__input" name="website" />
                 </div>
                 <div class="form__row">
                     <label for="bio" class="form__label">Bio:</label>
-                    <textarea id="bio" name ="bio"><?= $profile['bio']; ?></textarea>
+                    <textarea id="bio" name ="bio"></textarea>
                 </div>
                 <div class="form__row">
                     <label for="email" class="form__label">Email:</label>
-                    <input id="email" type="email" class="form__input" value="<?= $profile['email']; ?>"/>
+                    <input id="email" type="email" class="form__input" name="email" />
                 </div>
                 <div class="form__row">
                     <label for="phone" class="form__label">Phone Number:</label>
-                    <input id="no_telp" type="tel" class="form__input" value="<?= $profile['no_telp']; ?>"/>
+                    <input id="no_telp" type="tel" class="form__input" name="no_telp" />
                 </div>
                 <div class="form__row">
                     <label for="gender" class="form__label">Gender:</label>
                     <select id="gender" name="gender">
-                        <?php
-                        foreach ($gender as $kelamin) {
-                            echo "<option value='$kelamin' ";
-                            echo $profile['gender'] == $kelamin ? 'selected="selected"' : '';
-                            echo ">$kelamin</option>";
-                        }
-                        ?>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="cant">Can't Remember</option>
                     </select>
                 </div>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" name="submit">
             </form>
         </div>
     </main>

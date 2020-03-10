@@ -10,7 +10,8 @@
 	 
 	if($cek > 0){
 		$data_profil = mysqli_query($koneksi,"select * from profile where username='$username'");
-		$row_akun = mysqli_fetch_array($data_profil);
+		$row_akun = mysqli_fetch_array($data);
+		$_SESSION['id'] = $row['id'];
 		$_SESSION['username'] = $username;
 		$_SESSION['status'] = "login";
 		$_SESSION["name"] = $row_akun["name"];

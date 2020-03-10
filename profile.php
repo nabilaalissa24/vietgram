@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
     session_start();
     require_once 'function.php';
-   /* $photo = query('SELECT * FROM photo');*/
-    $profile = query("SELECT * FROM profile");
+    include "koneksi.php";
+
+    $user_id = $_SESSION['user_id'];
+    $result = mysqli_query($koneksi,"select * from profile where id='$user_id'" );
+    $data = mysqli_fetch_assoc($result);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,8 +57,8 @@
             </div>
             <div class="profile__column">
                 <div class="profile__title">
-                    <h3 class="profile__username"><?= $profile[0]['username']; ?></h3>
-                    <a href="edit-profile.php?id=<?= $profile[0]['id']; ?>">Edit profile</a>
+                    <h3 class="profile__username"><?php echo $data['name']; ?></h3>
+                    <a href="edit-profile.php">Edit profile</a>
                     <i class="fa fa-cog fa-lg"></i>
                 </div>
                 <ul class="profile__stats">
@@ -70,9 +74,9 @@
                 </ul>
                 <p class="profile__bio">
                     <span class="profile__full-name">
-                        <?= $profile[0]['name']; ?>
-                    </span> <?= $profile[0]['bio']; ?>
-                    <a href="#"><?= $profile[0]['website']; ?></a>
+                        <?php echo $data['name']; ?>
+                    </span> <?php echo $data['bio']; ?>
+                    <a href="#"><?php echo $data['website']; ?></a>
                 </p>
             </div>
         </header>
@@ -91,28 +95,28 @@
                 </div>
             </div>
             <div class="profile__photo">
-                <img src="images/feedPhoto.jpg" />
+                <img src="images/feedPhoto1.jpg" />
                 <div class="profile__photo-overlay">
                     <span class="overlay__item">
                             <i class="fa fa-heart"></i>
-                            486
+                            450
                         </span>
                     <span class="overlay__item">
                             <i class="fa fa-comment"></i>
-                            344
+                            301
                         </span>
                 </div>
             </div>
             <div class="profile__photo">
-                <img src="images/feedPhoto.jpg" />
+                <img src="images/feedPhoto2.jpg" />
                 <div class="profile__photo-overlay">
                     <span class="overlay__item">
                                 <i class="fa fa-heart"></i>
-                                486
+                                790
                             </span>
                     <span class="overlay__item">
                                 <i class="fa fa-comment"></i>
-                                344
+                                399
                             </span>
                 </div>
             </div>
